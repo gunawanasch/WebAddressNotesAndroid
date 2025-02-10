@@ -13,9 +13,9 @@ import com.gunawan.webaddressnotes.model.WebAddress;
 import java.util.ArrayList;
 
 public class Database extends SQLiteOpenHelper {
-    private static final int DATABASE_VERSION    = 1;
-    private static final String DATABASE_NAME    = "web_address_notes";
-    private static final String TABLE_WEB        = "web_address";
+    private static final int DATABASE_VERSION   = 1;
+    private static final String DATABASE_NAME   = "web_address_notes";
+    private static final String TABLE_WEB       = "web_address";
     private Context context;
 
     public Database(Context context) {
@@ -36,7 +36,7 @@ public class Database extends SQLiteOpenHelper {
     }
 
     public void addWebAddress(String name, String address) {
-        if(totalData() >= 500) {
+        if (totalData() >= 500) {
             deleteOutOfDataWebAddress();
         }
         ContentValues values = new ContentValues();
@@ -55,14 +55,14 @@ public class Database extends SQLiteOpenHelper {
             cv.put("name", name);
             cv.put("address", address);
             db.update(TABLE_WEB, cv, where, null);
-        } catch(SQLException e){
+        } catch(SQLException e) {
             Log.e("result query", "Error in updating table");
         }
     }
 
     public void deleteWebAddres(int id) {
         SQLiteDatabase db = this.getWritableDatabase();
-        if(db != null) {
+        if (db != null) {
             db.delete(TABLE_WEB, "id = ?", new String[] {
                     String.valueOf(id)
             });
@@ -73,25 +73,26 @@ public class Database extends SQLiteOpenHelper {
     private int totalData() {
         int total = 0;
         SQLiteDatabase db = this.getWritableDatabase();
-        if(db != null) {
+        if (db != null) {
             Cursor c = db.rawQuery("SELECT COUNT(id) FROM " + TABLE_WEB, null);
-            if(c != null) {
-                if(c.moveToFirst()) {
+            if (c != null) {
+                if (c.moveToFirst()) {
                     total = c.getInt(0);
                     c.close();
                 }
             }
             db.close();
         }
+
         return total;
     }
 
     private void deleteOutOfDataWebAddress() {
         SQLiteDatabase db = this.getWritableDatabase();
-        if(db != null) {
+        if (db != null) {
             Cursor c = db.rawQuery("SELECT id FROM " + TABLE_WEB + " ORDER BY id ASC LIMIT 1", null);
-            if(c != null) {
-                if(c.moveToFirst()) {
+            if (c != null) {
+                if (c.moveToFirst()) {
                     db.delete(TABLE_WEB, "id = ?", new String[] {
                             c.getString(0)
                     });
@@ -103,14 +104,14 @@ public class Database extends SQLiteOpenHelper {
     }
 
     public ArrayList<WebAddress> getListWebAddress() {
-        ArrayList<WebAddress> list = new ArrayList<WebAddress>();
-        SQLiteDatabase db = this.getWritableDatabase();
-        if(db!=null) {
+        ArrayList<WebAddress> list  = new ArrayList<WebAddress>();
+        SQLiteDatabase db           = this.getWritableDatabase();
+        if (db!=null) {
             try {
                 Cursor c = db.rawQuery("SELECT id, name, address FROM " + TABLE_WEB +
                         " ORDER BY id DESC", null);
-                if(c != null) {
-                    if(c.moveToFirst()) {
+                if (c != null) {
+                    if (c.moveToFirst()) {
                         do {
                             WebAddress w = new WebAddress(c.getInt(0), c.getString(1), c.getString(2));
                             list.add(w);
@@ -124,13 +125,8 @@ public class Database extends SQLiteOpenHelper {
             }
             db.close();
         }
-        return list;
-    }
 
-    public Cursor getAllDataToExcel(){
-        return(getReadableDatabase()
-                .rawQuery("select name, address from web_address ORDER BY id ASC",
-                        null));
+        return list;
     }
 
 }

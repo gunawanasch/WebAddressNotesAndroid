@@ -1,7 +1,6 @@
 package com.gunawan.webaddressnotes.activity;
 
 import android.content.DialogInterface;
-import android.database.Cursor;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -28,8 +27,7 @@ public class MainActivity extends AppCompatActivity {
     private FloatingActionButton fabAdd;
     private Database db;
     private WebAddressAdapter adapter;
-    private ArrayList<WebAddress> listWeb = new ArrayList<WebAddress>();
-    private Cursor cur;
+    private ArrayList<WebAddress> listWeb = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,9 +37,9 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void setupView() {
-        recyclerWebAddress = (RecyclerView) findViewById(R.id.recyclerWebAddress);
-        fabAdd = (FloatingActionButton) findViewById(R.id.fab);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        recyclerWebAddress  = findViewById(R.id.recyclerWebAddress);
+        fabAdd              = findViewById(R.id.fab);
+        Toolbar toolbar     = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         db = new Database(this);
         getDataWebAddress();
@@ -54,7 +52,7 @@ public class MainActivity extends AppCompatActivity {
         recyclerWebAddress.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
         listWeb.clear();
         listWeb = db.getListWebAddress();
-        if(listWeb != null) {
+        if (listWeb != null) {
             adapter = new WebAddressAdapter(this, listWeb);
             adapter.notifyDataSetChanged();
             recyclerWebAddress.setAdapter(adapter);
@@ -73,15 +71,15 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void showDialogFormWebAddress(final boolean isEdit, final int position) {
-        final BottomSheetDialog mBottomSheetDialog = new BottomSheetDialog(this);
-        View sheetView = getLayoutInflater().inflate(R.layout.dialog_form_web_address, null);
+        final BottomSheetDialog mBottomSheetDialog  = new BottomSheetDialog(this);
+        View sheetView                              = getLayoutInflater().inflate(R.layout.dialog_form_web_address, null);
         mBottomSheetDialog.setContentView(sheetView);
         mBottomSheetDialog.show();
-        final EditText etName = sheetView.findViewById(R.id.etName);
-        final EditText etAddress = sheetView.findViewById(R.id.etAddress);
-        Button btnSave = sheetView.findViewById(R.id.btnSave);
+        final EditText etName       = sheetView.findViewById(R.id.etName);
+        final EditText etAddress    = sheetView.findViewById(R.id.etAddress);
+        Button btnSave              = sheetView.findViewById(R.id.btnSave);
 
-        if(isEdit) {
+        if (isEdit) {
             etName.setText(listWeb.get(position).getName());
             etAddress.setText(listWeb.get(position).getAddress());
         }
@@ -98,7 +96,7 @@ public class MainActivity extends AppCompatActivity {
                     }).show();
                 }
                 else {
-                    if(isEdit) {
+                    if (isEdit) {
                         db.updateWebAddres(listWeb.get(position).getId(), etName.getText().toString().trim(), etAddress.getText().toString().trim());
                     }
                     else {
