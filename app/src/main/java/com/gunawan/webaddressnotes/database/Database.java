@@ -13,9 +13,9 @@ import com.gunawan.webaddressnotes.model.WebAddress;
 import java.util.ArrayList;
 
 public class Database extends SQLiteOpenHelper {
-    private static final int DATABASE_VERSION    = 1;
-    private static final String DATABASE_NAME    = "web_address_notes";
-    private static final String TABLE_WEB        = "web_address";
+    private static final int DATABASE_VERSION   = 1;
+    private static final String DATABASE_NAME   = "web_address_notes";
+    private static final String TABLE_WEB       = "web_address";
     private Context context;
 
     public Database(Context context) {
