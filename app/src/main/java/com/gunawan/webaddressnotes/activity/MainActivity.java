@@ -23,7 +23,7 @@ import com.gunawan.webaddressnotes.model.WebAddress;
 import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
-    private RecyclerView recyclerWebAddress;
+    private RecyclerView rvWebAddress;
     private FloatingActionButton fabAdd;
     private Database db;
     private WebAddressAdapter adapter;
@@ -37,9 +37,9 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void setupView() {
-        recyclerWebAddress  = findViewById(R.id.recyclerWebAddress);
-        fabAdd              = findViewById(R.id.fab);
-        Toolbar toolbar     = findViewById(R.id.toolbar);
+        rvWebAddress    = findViewById(R.id.rvWebAddress);
+        fabAdd          = findViewById(R.id.fab);
+        Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         db = new Database(this);
         getDataWebAddress();
@@ -47,15 +47,15 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void getDataWebAddress() {
-        ViewCompat.setNestedScrollingEnabled(recyclerWebAddress, false);
-        recyclerWebAddress.setHasFixedSize(true);
-        recyclerWebAddress.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
+        ViewCompat.setNestedScrollingEnabled(rvWebAddress, false);
+        rvWebAddress.setHasFixedSize(true);
+        rvWebAddress.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
         listWeb.clear();
         listWeb = db.getListWebAddress();
         if (listWeb != null) {
             adapter = new WebAddressAdapter(this, listWeb);
             adapter.notifyDataSetChanged();
-            recyclerWebAddress.setAdapter(adapter);
+            rvWebAddress.setAdapter(adapter);
             adapter.setOnItemClickListener(new WebAddressAdapter.OnCustomItemClickListener() {
                 @Override
                 public void onEditClick(int position) {

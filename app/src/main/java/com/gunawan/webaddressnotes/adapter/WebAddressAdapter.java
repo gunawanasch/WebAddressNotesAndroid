@@ -96,8 +96,8 @@ public class WebAddressAdapter extends RecyclerView.Adapter<WebAddressAdapter.Vi
                     final int position = getAdapterPosition();
                     Log.e("data adapter", wa.get(position).getName());
                     if(position != RecyclerView.NO_POSITION) {
-                        final Context context = ivOptionMenu.getContext();
-                        PopupMenu popup = new PopupMenu(context, ivOptionMenu);
+                        final Context context   = ivOptionMenu.getContext();
+                        PopupMenu popup         = new PopupMenu(context, ivOptionMenu);
                         popup.inflate(R.menu.option_menu_list);
                         popup.setOnMenuItemClickListener(item -> {
                             int itemId = item.getItemId();

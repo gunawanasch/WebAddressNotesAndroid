@@ -50,8 +50,8 @@ public class Database extends SQLiteOpenHelper {
     public void updateWebAddres(int id, String name, String address) {
         String where = "id = " + id;
         try {
-            SQLiteDatabase db = getWritableDatabase();
-            ContentValues cv = new ContentValues();
+            SQLiteDatabase db   = getWritableDatabase();
+            ContentValues cv    = new ContentValues();
             cv.put("name", name);
             cv.put("address", address);
             db.update(TABLE_WEB, cv, where, null);
@@ -71,8 +71,8 @@ public class Database extends SQLiteOpenHelper {
     }
 
     private int totalData() {
-        int total = 0;
-        SQLiteDatabase db = this.getWritableDatabase();
+        int total           = 0;
+        SQLiteDatabase db   = this.getWritableDatabase();
         if (db != null) {
             Cursor c = db.rawQuery("SELECT COUNT(id) FROM " + TABLE_WEB, null);
             if (c != null) {
