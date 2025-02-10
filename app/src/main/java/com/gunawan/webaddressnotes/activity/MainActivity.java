@@ -1,7 +1,6 @@
 package com.gunawan.webaddressnotes.activity;
 
 import android.content.DialogInterface;
-import android.database.Cursor;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -31,7 +30,7 @@ public class MainActivity extends AppCompatActivity {
     private WebAddressViewModel viewModel;
     private FloatingActionButton fabAdd;
     private WebAddressAdapter adapter;
-    private ArrayList<WebAddress> listWeb = new ArrayList<WebAddress>();
+    private ArrayList<WebAddress> listWeb = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,9 +40,9 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void setupView() {
-        recyclerWebAddress = findViewById(R.id.recyclerWebAddress);
-        fabAdd = findViewById(R.id.fab);
-        Toolbar toolbar = findViewById(R.id.toolbar);
+        recyclerWebAddress  = findViewById(R.id.recyclerWebAddress);
+        fabAdd              = findViewById(R.id.fab);
+        Toolbar toolbar     = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         viewModel = new ViewModelProvider(this).get(WebAddressViewModel.class);
         getDataWebAddress();
@@ -59,7 +58,7 @@ public class MainActivity extends AppCompatActivity {
                 recyclerWebAddress.setLayoutManager(new LinearLayoutManager(MainActivity.this, LinearLayoutManager.VERTICAL, false));
                 listWeb.clear();
                 listWeb = (ArrayList<WebAddress>) webAddress;
-                if(listWeb != null) {
+                if (listWeb != null) {
                     adapter = new WebAddressAdapter(MainActivity.this, listWeb);
                     adapter.notifyDataSetChanged();
                     recyclerWebAddress.setAdapter(adapter);
@@ -88,7 +87,7 @@ public class MainActivity extends AppCompatActivity {
         final EditText etAddress = sheetView.findViewById(R.id.etAddress);
         Button btnSave = sheetView.findViewById(R.id.btnSave);
 
-        if(isEdit) {
+        if (isEdit) {
             etName.setText(listWeb.get(position).getName());
             etAddress.setText(listWeb.get(position).getAddress());
         }
@@ -96,7 +95,7 @@ public class MainActivity extends AppCompatActivity {
         btnSave.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(etName.getText().toString().isEmpty() || etAddress.getText().toString().isEmpty()) {
+                if (etName.getText().toString().isEmpty() || etAddress.getText().toString().isEmpty()) {
                     AlertDialog.Builder ab = new AlertDialog.Builder(MainActivity.this);
                     ab.setMessage("Please complete all fields.");
                     ab.setNeutralButton("OK", new DialogInterface.OnClickListener() {
@@ -105,7 +104,7 @@ public class MainActivity extends AppCompatActivity {
                     }).show();
                 }
                 else {
-                    if(isEdit) {
+                    if (isEdit) {
                         WebAddress webAddress = new WebAddress(etName.getText().toString().trim(), etAddress.getText().toString().trim());
                         webAddress.setId(listWeb.get(position).getId());
                         viewModel.update(webAddress);
