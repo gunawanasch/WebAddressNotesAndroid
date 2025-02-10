@@ -30,7 +30,7 @@ public class MainActivity extends AppCompatActivity {
     private WebAddressViewModel viewModel;
     private FloatingActionButton fabAdd;
     private WebAddressAdapter adapter;
-    private ArrayList<WebAddress> listWeb = new ArrayList<WebAddress>();
+    private ArrayList<WebAddress> listWeb = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,8 +40,8 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void setupView() {
-        rvWebAddress = findViewById(R.id.recyclerWebAddress);
-        fabAdd = findViewById(R.id.fab);
+        rvWebAddress    = findViewById(R.id.recyclerWebAddress);
+        fabAdd          = findViewById(R.id.fab);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         viewModel = new ViewModelProvider(this).get(WebAddressViewModel.class);
@@ -60,7 +60,7 @@ public class MainActivity extends AppCompatActivity {
                 rvWebAddress.setLayoutManager(new LinearLayoutManager(MainActivity.this, LinearLayoutManager.VERTICAL, false));
                 listWeb.clear();
                 listWeb = webAddress;
-                if(listWeb != null) {
+                if (listWeb != null) {
                     adapter = new WebAddressAdapter(MainActivity.this, listWeb);
                     adapter.notifyDataSetChanged();
                     rvWebAddress.setAdapter(adapter);
@@ -81,15 +81,15 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void showDialogFormWebAddress(final boolean isEdit, final int position) {
-        final BottomSheetDialog mBottomSheetDialog = new BottomSheetDialog(this);
-        View sheetView = getLayoutInflater().inflate(R.layout.dialog_form_web_address, null);
+        final BottomSheetDialog mBottomSheetDialog  = new BottomSheetDialog(this);
+        View sheetView                              = getLayoutInflater().inflate(R.layout.dialog_form_web_address, null);
         mBottomSheetDialog.setContentView(sheetView);
         mBottomSheetDialog.show();
-        final EditText etName = sheetView.findViewById(R.id.etName);
-        final EditText etAddress = sheetView.findViewById(R.id.etAddress);
-        Button btnSave = sheetView.findViewById(R.id.btnSave);
+        final EditText etName       = sheetView.findViewById(R.id.etName);
+        final EditText etAddress    = sheetView.findViewById(R.id.etAddress);
+        Button btnSave              = sheetView.findViewById(R.id.btnSave);
 
-        if(isEdit) {
+        if (isEdit) {
             etName.setText(listWeb.get(position).getName());
             etAddress.setText(listWeb.get(position).getAddress());
         }
@@ -97,7 +97,7 @@ public class MainActivity extends AppCompatActivity {
         btnSave.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(etName.getText().toString().isEmpty() || etAddress.getText().toString().isEmpty()) {
+                if (etName.getText().toString().isEmpty() || etAddress.getText().toString().isEmpty()) {
                     AlertDialog.Builder ab = new AlertDialog.Builder(MainActivity.this);
                     ab.setMessage("Please complete all fields.");
                     ab.setNeutralButton("OK", new DialogInterface.OnClickListener() {
@@ -106,7 +106,7 @@ public class MainActivity extends AppCompatActivity {
                     }).show();
                 }
                 else {
-                    if(isEdit) {
+                    if (isEdit) {
                         viewModel.update(new WebAddress(listWeb.get(position).getId(), etName.getText().toString().trim(), etAddress.getText().toString().trim()));
                     }
                     else {
