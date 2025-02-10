@@ -26,7 +26,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
-    private RecyclerView recyclerWebAddress;
+    private RecyclerView rvWebAddress;
     private WebAddressViewModel viewModel;
     private FloatingActionButton fabAdd;
     private WebAddressAdapter adapter;
@@ -40,9 +40,9 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void setupView() {
-        recyclerWebAddress  = findViewById(R.id.recyclerWebAddress);
-        fabAdd              = findViewById(R.id.fab);
-        Toolbar toolbar     = findViewById(R.id.toolbar);
+        rvWebAddress    = findViewById(R.id.rvWebAddress);
+        fabAdd          = findViewById(R.id.fab);
+        Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         viewModel = new ViewModelProvider(this).get(WebAddressViewModel.class);
         getDataWebAddress();
@@ -53,15 +53,15 @@ public class MainActivity extends AppCompatActivity {
         viewModel.getAllWebAddress().observe(this, new Observer<List<WebAddress>>() {
             @Override
             public void onChanged(List<WebAddress> webAddress) {
-                ViewCompat.setNestedScrollingEnabled(recyclerWebAddress, false);
-                recyclerWebAddress.setHasFixedSize(true);
-                recyclerWebAddress.setLayoutManager(new LinearLayoutManager(MainActivity.this, LinearLayoutManager.VERTICAL, false));
+                ViewCompat.setNestedScrollingEnabled(rvWebAddress, false);
+                rvWebAddress.setHasFixedSize(true);
+                rvWebAddress.setLayoutManager(new LinearLayoutManager(MainActivity.this, LinearLayoutManager.VERTICAL, false));
                 listWeb.clear();
                 listWeb = (ArrayList<WebAddress>) webAddress;
                 if (listWeb != null) {
                     adapter = new WebAddressAdapter(MainActivity.this, listWeb);
                     adapter.notifyDataSetChanged();
-                    recyclerWebAddress.setAdapter(adapter);
+                    rvWebAddress.setAdapter(adapter);
                     adapter.setOnItemClickListener(new WebAddressAdapter.OnCustomItemClickListener() {
                         @Override
                         public void onEditClick(int position) {
