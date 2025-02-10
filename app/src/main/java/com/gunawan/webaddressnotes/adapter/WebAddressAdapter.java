@@ -59,8 +59,7 @@ public class WebAddressAdapter extends RecyclerView.Adapter<WebAddressAdapter.Vi
     }
 
     public void openToBrowser(View v, String url){
-        if (!url.startsWith("http://") && !url.startsWith("https://"))
-            url = "http://" + url;
+        if (!url.startsWith("http://") && !url.startsWith("https://"))  url = "http://" + url;
         Uri webpage     = Uri.parse(url);
         Intent intent   = new Intent(Intent.ACTION_VIEW, webpage);
         v.getContext().startActivity(intent);
@@ -86,13 +85,13 @@ public class WebAddressAdapter extends RecyclerView.Adapter<WebAddressAdapter.Vi
 
         public ViewHolder(View view, final OnCustomItemClickListener listener) {
             super(view);
-            tvName = view.findViewById(R.id.tvName);
-            tvAddress = view.findViewById(R.id.tvAddress);
-            ivOptionMenu = view.findViewById(R.id.ivOptionMenu);
-            cardView = view.findViewById(R.id.cardView);
+            tvName          = view.findViewById(R.id.tvName);
+            tvAddress       = view.findViewById(R.id.tvAddress);
+            ivOptionMenu    = view.findViewById(R.id.ivOptionMenu);
+            cardView        = view.findViewById(R.id.cardView);
 
             ivOptionMenu.setOnClickListener(v -> {
-                if(listener != null) {
+                if (listener != null) {
                     final int position = getAdapterPosition();
                     Log.e("data adapter", wa.get(position).getName());
                     if(position != RecyclerView.NO_POSITION) {
