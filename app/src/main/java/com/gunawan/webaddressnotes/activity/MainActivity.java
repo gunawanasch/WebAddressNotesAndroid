@@ -79,13 +79,13 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void showDialogFormWebAddress(final boolean isEdit, final int position) {
-        final BottomSheetDialog mBottomSheetDialog = new BottomSheetDialog(this);
-        View sheetView = getLayoutInflater().inflate(R.layout.dialog_form_web_address, null);
+        final BottomSheetDialog mBottomSheetDialog  = new BottomSheetDialog(this);
+        View sheetView                              = getLayoutInflater().inflate(R.layout.dialog_form_web_address, null);
         mBottomSheetDialog.setContentView(sheetView);
         mBottomSheetDialog.show();
-        final EditText etName = sheetView.findViewById(R.id.etName);
-        final EditText etAddress = sheetView.findViewById(R.id.etAddress);
-        Button btnSave = sheetView.findViewById(R.id.btnSave);
+        final EditText etName       = sheetView.findViewById(R.id.etName);
+        final EditText etAddress    = sheetView.findViewById(R.id.etAddress);
+        Button btnSave              = sheetView.findViewById(R.id.btnSave);
 
         if (isEdit) {
             etName.setText(listWeb.get(position).getName());

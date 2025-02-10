@@ -41,6 +41,7 @@ public class WebAddressAdapter extends RecyclerView.Adapter<WebAddressAdapter.Vi
         LayoutInflater inflater = activity.getLayoutInflater();
         View view               = inflater.inflate(R.layout.row_web_address, viewGroup, false);
         ViewHolder viewHolder   = new ViewHolder(view, mListener);
+
         return viewHolder;
     }
 
