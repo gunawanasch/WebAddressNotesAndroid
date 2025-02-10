@@ -58,7 +58,7 @@ public class WebAddressAdapter extends RecyclerView.Adapter<WebAddressAdapter.Vi
         };
     }
 
-    public void openToBrowser(View v, String url){
+    public void openToBrowser(View v, String url) {
         if (!url.startsWith("http://") && !url.startsWith("https://"))  url = "http://" + url;
         Uri webpage     = Uri.parse(url);
         Intent intent   = new Intent(Intent.ACTION_VIEW, webpage);
@@ -66,7 +66,7 @@ public class WebAddressAdapter extends RecyclerView.Adapter<WebAddressAdapter.Vi
         try {
             v.getContext().startActivity(intent);
         }
-        catch (Exception e){
+        catch (Exception e) {
             if (url.startsWith("http://")) {
                 openToBrowser(v, url.replace("http://","https://"));
             }
