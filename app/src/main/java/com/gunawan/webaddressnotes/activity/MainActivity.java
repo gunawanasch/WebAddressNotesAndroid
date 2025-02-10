@@ -40,7 +40,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void setupView() {
-        rvWebAddress    = findViewById(R.id.recyclerWebAddress);
+        rvWebAddress    = findViewById(R.id.rvWebAddress);
         fabAdd          = findViewById(R.id.fab);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
